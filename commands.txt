@@ -1,0 +1,5 @@
+git log --oneline
+
+git checkout 13a2780 (readonly)
+
+git checkout master
