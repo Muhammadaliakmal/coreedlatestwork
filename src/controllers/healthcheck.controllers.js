@@ -6,7 +6,7 @@ import { asyncHandler } from "../utils/async-handler.js"
 
 
 const healthcheck = asyncHandler(async (req,res) => {
-  res.status(200).json(new ApiResponse(200, null, "server is my healthy"))
+  res.status(200).json(new ApiResponse(200, null, "my server is healthy"))
 })
 
 export {healthcheck}

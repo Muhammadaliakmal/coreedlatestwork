@@ -5,6 +5,7 @@ import { config } from 'dotenv';
 
 import mongoose from 'mongoose';
 config()
+
 /**
  * MongoDB se connection establish karta hai
  * @param {string} ConnectionURL - MongoDB Atlas ka connection string
@@ -12,13 +13,7 @@ config()
  */
 const connectMongoDb = async () => {
     try {
-        const mongoUri = process.env.MONGODB_URI || process.env.MONGODB_URL;
-
-        // If no MongoDB URI is provided, skip the connection
-        if (!mongoUri || mongoUri.trim() === "") {
-            console.log("⚠️  MongoDB URI not provided, skipping database connection");
-            return null;
-        }
+        const mongoUri = process.env.MONGODB_URL || 'mongodb://localhost:27017/project_management';
 
         // Mongoose ko MongoDB se connect karein
         const connection = await mongoose.connect(mongoUri);
@@ -30,8 +25,7 @@ const connectMongoDb = async () => {
         return connection;
     } catch (error) {
         console.error("❌ MongoDB connection error:", error.message);
-        // Connection fail hone par application band kar dein
-        process.exit(1);
+        throw error; // Just throw the error to be handled by the caller
     }
 }
 
