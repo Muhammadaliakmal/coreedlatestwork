@@ -11,12 +11,12 @@ config()
  * @param {string} ConnectionURL - MongoDB Atlas ka connection string
  * @returns {Promise} - Mongoose connection object
  */
-const connectMongoDb = async () => {
+const connectMongoDb = async (mongoUri) => {
     try {
-        const mongoUri = process.env.MONGODB_URL || 'mongodb://localhost:27017/project_management';
+        const uri = mongoUri || process.env.MONGODB_URL || 'mongodb://localhost:27017/project_management';
 
         // Mongoose ko MongoDB se connect karein
-        const connection = await mongoose.connect(mongoUri);
+        const connection = await mongoose.connect(uri);
 
         console.log("✅ MongoDB connected successfully!");
         console.log(`📊 Database: ${connection.connection.name}`);
