@@ -488,13 +488,45 @@ const forgetPasswordRequest = asyncHandler(async (req, res) => {
 
 
 
+const updateUser = asyncHandler(async (req, res) => {
+  const { username, email, fullname, password } = req.body;
+
+  if (!username && !email && !fullname && !password) {
+    throw new ApiError(400, "At least one field is required");
+  }
+
+  if (email) {
+    const existing = await UserTable.findOne({ email, _id: { $ne: req.user._id } });
+    if (existing) throw new ApiError(400, "Email already in use");
+  }
+
+  if (username) {
+    const existing = await UserTable.findOne({ username, _id: { $ne: req.user._id } });
+    if (existing) throw new ApiError(400, "Username already in use");
+  }
+
+  const updateFields = {};
+  if (username) updateFields.username = username;
+  if (email) updateFields.email = email;
+  if (fullname) updateFields.fullname = fullname;
+  if (password) updateFields.password = password;
+
+  const updatedUser = await UserTable.findByIdAndUpdate(
+    req.user._id,
+    { $set: updateFields },
+    { new: true }
+  ).select("-password -refreshToken -emailverificationtoken -emailverificationtokenexpiry");
+
+  return res.status(200).json(new ApiResponse(200, updatedUser, "User updated successfully"));
+});
+
 const resetPassword = asyncHandler(async (req, res) => {
   const { resetToken } = req.params;
-  
+
   console.log("=== PASSWORD RESET REQUEST ==="); // Debug log
   console.log("Request method:", req.method); // Debug log
   console.log("Received reset token:", resetToken); // Debug log
-  
+
   // Handle GET request - validate token
   if (req.method === 'GET') {
     // For GET request, just validate the token and return success/failure
@@ -619,5 +651,6 @@ export {
   getCurrentUser,
   refreshAccessToken,
   forgetPasswordRequest,
-  resetPassword
+  resetPassword,
+  updateUser
 };

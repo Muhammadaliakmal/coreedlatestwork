@@ -18,7 +18,6 @@ const connectMongoDb = async (mongoUri) => {
         // Mongoose ko MongoDB se connect karein
         const connection = await mongoose.connect(uri);
 
-        console.log("✅ MongoDB connected successfully!");
         console.log(`📊 Database: ${connection.connection.name}`);
         console.log(`🌐 Host: ${connection.connection.host}`);
 

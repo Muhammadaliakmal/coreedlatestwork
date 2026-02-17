@@ -9,7 +9,8 @@ import {
   getCurrentUser,
   refreshAccessToken,
   forgetPasswordRequest,
-  resetPassword
+  resetPassword,
+  updateUser
 } from "../controllers/auth.controllers.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 const router = express.Router();
@@ -33,12 +34,8 @@ router.route("/refresh-token").post(refreshAccessToken);// refresh access token 
 
 router.route("/forget-password").post(forgetPasswordRequest); // forget password route
 
-// Handle both GET (show reset form) and POST (process reset) for password reset
-router.route("/reset-password/:resetToken").all(resetPassword); // Handle both GET and POST for password reset 
+router.route("/reset-password/:resetToken").get(resetPassword); // reset password route (GET for email link)
 
-
-
-
-
+router.route("/update-user").post(verifyJWT, updateUser); // update user route
 
 export default router;
