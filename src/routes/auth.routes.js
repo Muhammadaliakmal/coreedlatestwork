@@ -10,7 +10,8 @@ import {
   refreshAccessToken,
   forgetPasswordRequest,
   resetPassword,
-  updateUser
+  updateUser,
+  changeCurrentPassword
 } from "../controllers/auth.controllers.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 const router = express.Router();
@@ -37,5 +38,7 @@ router.route("/forget-password").post(forgetPasswordRequest); // forget password
 router.route("/reset-password/:resetToken").get(resetPassword); // reset password route (GET for email link)
 
 router.route("/update-user").post(verifyJWT, updateUser); // update user route
+
+router.route("/change-password").post(verifyJWT, changeCurrentPassword); // change password route
 
 export default router;
