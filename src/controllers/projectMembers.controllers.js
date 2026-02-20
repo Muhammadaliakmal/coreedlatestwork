@@ -21,3 +21,8 @@ export const listProjectMember = asyncHandler(async (req, res) => {
     // return response to client
     res.status(200).json(new ApiResponse(200,members , "Project members fetched successfully"));
 })
+
+
+export const addProjectMember = asyncHandler(async (req, res) => {
+  //
+})
