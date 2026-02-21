@@ -6,12 +6,14 @@ import { requireProjectMember ,requireProjectAdmin} from "../middlewares/project
 const router = express.Router();
 
 // Middleware
-router.use(verifyJWT);// this will verify the token before allowing access to the route
+router.use(verifyJWT);//  you are login
 
-router.use(requireProjectMember);// this will check if the user is a member of this project
+// /api/projects/:projectId/members
+router.use(requireProjectMember);// you are same project member
 
-router.route("/").get(listProjectMember);// this will list all the members of a project
+// API routes
+router.route("/:projectId/members").get(listProjectMember);// this will list all the members of a project
 
-router.route("/").post(requireProjectAdmin,addProjectMember);// this will add a member to a project
+router.route("/:projectId/members").post(requireProjectAdmin,addProjectMember);// this will add a member to a project
 
 export default router;
