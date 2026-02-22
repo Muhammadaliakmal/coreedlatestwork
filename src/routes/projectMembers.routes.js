@@ -1,7 +1,7 @@
 // src\routes\projectMembers.routes.js
 import express from "express";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
-import { listProjectMember,addProjectMember } from "../controllers/projectMembers.controllers.js";
+import { listProjectMember,addProjectMember,updateProjectMember,removeProjectMember } from "../controllers/projectMembers.controllers.js";
 import { requireProjectMember ,requireProjectAdmin} from "../middlewares/project.middleware.js";
 const router = express.Router();
 
@@ -15,5 +15,10 @@ router.use(requireProjectMember);// you are same project member
 router.route("/:projectId/members").get(listProjectMember);// this will list all the members of a project
 
 router.route("/:projectId/members").post(requireProjectAdmin,addProjectMember);// this will add a member to a project
+
+
+router.route("/:projectId/members/:userId").put(requireProjectAdmin,updateProjectMember)//update a project member's role (e.g., promote to admin or demote to member)
+
+router.route("/:projectId/members/:userId").delete(requireProjectAdmin,removeProjectMember) // remove a member from a project (only for admins)
 
 export default router;
