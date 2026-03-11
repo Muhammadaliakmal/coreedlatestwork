@@ -6,6 +6,7 @@ import projectRouter from "./routes/projects.routes.js";
 import cookieParser from "cookie-parser";
 import { ApiError } from "./utils/api-error.js";
 import projectMemberRouter from "./routes/projectMembers.routes.js";
+import taskRouter from "./routes/task.routes.js";
 
 const app = express();
 //-------------------------------cookie parser
@@ -36,6 +37,7 @@ app.use("/api/v1/health-check", healthcheckroutes);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/project", projectRouter);
 app.use("/api/v1/projects/:projectId/members", projectMemberRouter);
+app.use("/api/v1/tasks",taskRouter)
 
 // Error handling middleware
 app.use((err, req, res, next) => {

@@ -26,4 +26,6 @@ services:
 
 volumes:
   mongo-data:
+    external: true
+    name: backend_mongo-data
     

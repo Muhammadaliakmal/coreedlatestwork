@@ -286,7 +286,7 @@ export const removeProjectMember = asyncHandler(async (req, res) => {
       );
   }
   // remove project member
-  await member.remove();
+  await member.deleteOne();
 
 
   // update project metadata totalmembers--

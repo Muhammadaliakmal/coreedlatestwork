@@ -21,17 +21,6 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Email, username, and password are required");
   }
 
-  // Clean up any existing user with the same email that might have old tokens
-  await UserTable.updateMany(
-    { email: email },
-    {
-      $unset: {
-        emailverificationtoken: "",
-        emailverificationtokenexpiry: "",
-      },
-    },
-  );
-
   // checking if user already exists
   const existingUser = await UserTable.findOne({
     $or: [{ email }, { username }],
