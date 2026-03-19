@@ -35,35 +35,30 @@ const projectSchema = new Schema(
         type: Boolean,
         default: false,
       },
-
-      Metadata: {
-        TotalTasks: {
-          type: Number,
-          default: 0,
-        },
-        CompletedTasks: {
-          type: Number,
-          default: 0,
-        },
-
-        totalmembers: {
-          type: Number,
-          default: 1,
-        },
-
-        lastActivity: {
-          type: Date,
-          default: Date.now,
-        },
-
-        isArchived: {
-          type: Boolean,
-          default: false,
-        },
-
-        archivedAt: {
-          type: Date,
-        },
+    },
+    metadata: {
+      totalTasks: {
+        type: Number,
+        default: 0,
+      },
+      completedTasks: {
+        type: Number,
+        default: 0,
+      },
+      totalMembers: {
+        type: Number,
+        default: 1,
+      },
+      lastActivity: {
+        type: Date,
+        default: Date.now,
+      },
+      isArchived: {
+        type: Boolean,
+        default: false,
+      },
+      archivedAt: {
+        type: Date,
       },
     },
   },
