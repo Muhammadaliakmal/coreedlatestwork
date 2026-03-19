@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import { ApiError } from "./utils/api-error.js";
 import projectMemberRouter from "./routes/projectMembers.routes.js";
 import taskRouter from "./routes/task.routes.js";
+import subTaskRouter from "./routes/subtask.routes.js";
 
 const app = express();
 //-------------------------------cookie parser
@@ -37,12 +38,13 @@ app.use("/api/v1/health-check", healthcheckroutes);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/project", projectRouter);
 app.use("/api/v1/projects/:projectId/members", projectMemberRouter);
-app.use("/api/v1/tasks",taskRouter)
+app.use("/api/v1/tasks", taskRouter);
+app.use("/api/v1/tasks", subTaskRouter);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  
+
   // Handle ApiError specifically
   if (err instanceof ApiError) {
     res.status(err.statusCode).json({
