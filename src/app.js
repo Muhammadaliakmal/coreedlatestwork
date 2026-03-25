@@ -11,7 +11,7 @@ import subTaskRouter from "./routes/subtask.routes.js";
 
 const app = express();
 //-------------------------------cookie parser
-app.use(cookieParser());
+app.use(cookieParser());    
 
 //------------------------------- middleware
 app.use(express.json({ limit: "16kb" })); // to make readable clients json.body

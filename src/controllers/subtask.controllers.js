@@ -1,7 +1,7 @@
 import { asyncHandler } from "../utils/async-handler.js";
 import {ApiError} from "../utils/api-error.js"
 import {tableTask} from "../models/task.model.js"
-import {subtaskTable} from "../models/subtask.model.js"
+import {subtaskTable} from "../models/subtask.models.js"
 import { ApiResponse } from "../utils/api-response.js";
 
 
