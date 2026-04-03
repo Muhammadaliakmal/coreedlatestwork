@@ -3,7 +3,7 @@ import { projectMember } from "../models/projectMemberRole.models.js";
 import { ApiResponse } from "../utils/api-response.js";
 import { ApiError } from "../utils/api-error.js";
 import { projectTable } from "../models/project.models.js";
-import { UserTable } from "../models/user.models.js";
+import { userTable } from "../models/user.models.js";
 
 export const listProjectMember = asyncHandler(async (req, res) => {
   // get project id from params
@@ -62,7 +62,7 @@ export const addProjectMember = asyncHandler(async (req, res) => {
   }
 
   // find user by email
-  const user = await UserTable.findOne({ email: email.toLowerCase().trim() });
+  const user = await userTable.findOne({ email: email.toLowerCase().trim() });
   if (!user) {
     return res
       .status(404)
